@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "17649715144",
+    "project_id": "revmedapp-d6a4a",
+    "storage_bucket": "revmedapp-d6a4a.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:17649715144:android:027bcec2a1a1f64b7962fd",
+        "android_client_info": {
+          "package_name": "com.app.revmed"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCFH1PVEHYR9Pl296a4IOWcoK8XEanqu6s"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
