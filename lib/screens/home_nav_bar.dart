@@ -1,31 +1,28 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:google_sign_in/google_sign_in.dart';
+import 'package:revmed/components/constants.dart';
+import 'package:revmed/screens/home/home.dart';
+import 'package:revmed/screens/quiz/quiz_selection_page.dart';
 
-class Home extends StatefulWidget {
-  const Home({super.key});
+class HomeNavBar extends StatefulWidget {
+  const HomeNavBar({super.key});
 
   @override
-  State<Home> createState() => _BottomNavigationBarExampleState();
+  State<HomeNavBar> createState() => _BottomNavigationBar();
 }
 
-class _BottomNavigationBarExampleState extends State<Home> {
+class _BottomNavigationBar extends State<HomeNavBar> {
   int _selectedIndex = 0;
   static const TextStyle optionStyle =
       TextStyle(fontSize: 30, fontWeight: FontWeight.bold);
-  static const List<Widget> _widgetOptions = <Widget>[
-    Text(
-      'Home',
-      style: optionStyle,
-    ),
-    Text(
+  static final List<Widget> _widgetOptions = <Widget>[
+    HomePage(),
+    const Text(
       'Rendimento',
       style: optionStyle,
     ),
-    Text(
-      'Questoes',
-      style: optionStyle,
-    ),
+    const QuizSelectionPage(),
   ];
 
   void _onItemTapped(int index) {
@@ -42,11 +39,6 @@ class _BottomNavigationBarExampleState extends State<Home> {
   @override
   Widget build(context) {
     return Scaffold(
-      appBar: AppBar(
-        actions: [
-          IconButton(onPressed: logOut, icon: const Icon(Icons.logout))
-        ],
-      ),
       body: Center(
         child: _widgetOptions.elementAt(_selectedIndex),
       ),
@@ -68,7 +60,7 @@ class _BottomNavigationBarExampleState extends State<Home> {
         currentIndex: _selectedIndex,
         showUnselectedLabels: true,
         unselectedItemColor: Colors.blueGrey,
-        selectedItemColor: Colors.amber[800],
+        selectedItemColor: primary,
         onTap: _onItemTapped,
       ),
     );

@@ -1,13 +1,33 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:google_sign_in/google_sign_in.dart';
+import 'package:revmed/components/constants.dart';
 import 'package:revmed/screens/auth/login_page.dart';
+import 'package:revmed/screens/auth/register_page.dart';
 
 //
-class AuthMenu extends StatelessWidget {
+class AuthMenu extends StatefulWidget {
   const AuthMenu({super.key});
 
+  @override
+  State<AuthMenu> createState() => _AuthMenuState();
+}
+
+class _AuthMenuState extends State<AuthMenu> {
   void signGoogle() async {
+    showDialog(
+      context: context,
+      builder: (context) {
+        Future.delayed(const Duration(seconds: 5), () {
+          Navigator.of(context).pop(true);
+        });
+        return const Center(
+          child: CircularProgressIndicator(
+            color: Color.fromARGB(255, 253, 152, 8),
+          ),
+        );
+      },
+    );
     final googleAccount = await GoogleSignIn().signIn();
 
     final googleAuth = await googleAccount?.authentication;
@@ -20,6 +40,7 @@ class AuthMenu extends StatelessWidget {
     await FirebaseAuth.instance.signInWithCredential(
       credential,
     );
+    
   }
 
   @override
@@ -48,16 +69,16 @@ class AuthMenu extends StatelessWidget {
                   fontSize: 24,
                 ),
               ),
-
               const SizedBox(height: 360),
-              
               Container(
                 margin: const EdgeInsets.only(right: 35, left: 35),
                 child: Column(children: [
                   TextButton.icon(
                     onPressed: () {
-                      Navigator.push(context,
-                          MaterialPageRoute(builder: (context) => LogInPage()));
+                      Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                              builder: (context) => const LogInPage()));
                     },
                     style: OutlinedButton.styleFrom(
                       minimumSize: const Size.fromHeight(40),
@@ -73,11 +94,7 @@ class AuthMenu extends StatelessWidget {
                     icon: const Icon(Icons.face),
                     label: const Text('Entrar com CPF'),
                   ),
-                  
-
                   const SizedBox(height: 10),
-                  
-
                   TextButton.icon(
                     onPressed: signGoogle,
                     style: OutlinedButton.styleFrom(
@@ -99,22 +116,28 @@ class AuthMenu extends StatelessWidget {
                   ),
                 ]),
               ),
-
               const SizedBox(height: 30),
-              
-              const Row(
+              Row(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
-                  Text(
+                  const Text(
                     'Ainda não tem uma conta',
                     style: TextStyle(color: Colors.white),
                   ),
-                  SizedBox(width: 4),
-                  Text(
-                    'Cadastre-se',
-                    style: TextStyle(
-                      color: Color.fromARGB(255, 253, 152, 8),
-                      fontWeight: FontWeight.bold,
+                  const SizedBox(width: 4),
+                  GestureDetector(
+                    onTap: () {
+                      Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                              builder: (context) => const RegisterPage()));
+                    },
+                    child: const Text(
+                      'Cadastre-se',
+                      style: TextStyle(
+                        color: primary,
+                        fontWeight: FontWeight.bold,
+                      ),
                     ),
                   ),
                 ],

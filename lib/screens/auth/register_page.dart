@@ -3,23 +3,24 @@ import 'package:flutter/material.dart';
 import 'package:revmed/components/constants.dart';
 import 'package:revmed/components/text_field.dart';
 
-class LogInPage extends StatefulWidget {
-  const LogInPage({super.key});
+class RegisterPage extends StatefulWidget {
+  const RegisterPage({super.key});
 
   @override
-  State<LogInPage> createState() => _LogInPageState();
+  State<RegisterPage> createState() => _RegisterPageState();
 }
 
-class _LogInPageState extends State<LogInPage> {
+class _RegisterPageState extends State<RegisterPage> {
   final emailController = TextEditingController();
 
   final passwordController = TextEditingController();
+  final confirmPasswordController = TextEditingController();
 
-  Future signUserIn() async {
+  Future signUserUp() async {
     showDialog(
       context: context,
       builder: (context) {
-        Future.delayed(const Duration(seconds: 2), () {
+        Future.delayed(const Duration(seconds: 3), () {
           Navigator.of(context).pop(true);
         });
         return const Center(
@@ -30,10 +31,17 @@ class _LogInPageState extends State<LogInPage> {
       },
     );
 
-    await FirebaseAuth.instance.signInWithEmailAndPassword(
-        email: emailController.text, password: passwordController.text);
-
-    Navigator.pop(context);
+    if (passwordController.text == confirmPasswordController.text &&
+        passwordController.text != '') {
+      await FirebaseAuth.instance.createUserWithEmailAndPassword(
+          email: emailController.text, password: passwordController.text);
+      Navigator.pop(context);
+    } else {
+      ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
+          content: Text(
+        'Please enter valid senha',
+      )));
+    }
   }
 
   @override
@@ -50,14 +58,11 @@ class _LogInPageState extends State<LogInPage> {
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
                 const SizedBox(height: 50),
-
                 Image.asset(
                   'assets/images/revmedLogo.png',
                   width: 80,
                 ),
-
                 const SizedBox(height: 30),
-
                 Text(
                   'Bem-vindo, faça login na sua conta agora.',
                   style: TextStyle(
@@ -65,50 +70,35 @@ class _LogInPageState extends State<LogInPage> {
                     fontSize: 16,
                   ),
                 ),
-
                 const SizedBox(height: 55),
-
                 MyTextField(
                   controller: emailController,
                   hintText: 'e-mail',
                   obscureText: false,
                   keyboardType: TextInputType.emailAddress,
                 ),
-
                 const SizedBox(height: 10),
-
                 MyTextField(
                   controller: passwordController,
                   hintText: 'Senha',
                   obscureText: true,
                   keyboardType: TextInputType.visiblePassword,
                 ),
-
                 const SizedBox(height: 10),
-
-                // change pass?
-                Padding(
-                  padding: const EdgeInsets.symmetric(horizontal: 35.0),
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.end,
-                    children: [
-                      Text(
-                        'Esqueceu sua senha?',
-                        style: TextStyle(color: Colors.grey[600]),
-                      ),
-                    ],
-                  ),
+                MyTextField(
+                  controller: confirmPasswordController,
+                  hintText: 'Confirmar Senha',
+                  obscureText: true,
+                  keyboardType: TextInputType.visiblePassword,
                 ),
-
-                const SizedBox(height: 55),
-
+                const SizedBox(height: 65),
                 Container(
                   margin: const EdgeInsets.symmetric(horizontal: 25),
                   child: Column(children: [
                     TextButton(
                       onPressed: () async {
                         try {
-                          await signUserIn();
+                          await signUserUp();
 
                           Navigator.pop(context);
                         } on FirebaseAuthException catch (error) {
@@ -116,6 +106,11 @@ class _LogInPageState extends State<LogInPage> {
                           ScaffoldMessenger.of(context).showSnackBar(SnackBar(
                               content: Text(
                             error.message ?? "Something went wrong",
+                          )));
+                        } on RecaptchaVerifierOnError catch (error) {
+                          ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+                              content: Text(
+                            error.toString(),
                           )));
                         } catch (error) {
                           print(error);
@@ -136,11 +131,10 @@ class _LogInPageState extends State<LogInPage> {
                         ),
                         backgroundColor: primary,
                       ),
-                      child: const Text('Entrar'),
+                      child: const Text('Registrar'),
                     ),
                   ]),
                 ),
-
                 const SizedBox(height: 50),
               ],
             ),

@@ -1,13 +1,7 @@
-// I'm gonna store my colors and stuff here
-// import the material package.
 import 'package:flutter/material.dart';
 
-// set color for correct answer
-const Color correct = Color(0xFF32AB58);
-// set color for incorrect answer
-const Color incorrect = Color(0xFFAB3232);
-// set a neutral color
-// not going to take pure white because it hurts eyes.
+const Color correct = Color.fromARGB(255, 148, 222, 171);
+const Color incorrect = Color.fromARGB(255, 207, 125, 125);
 const Color neutral = Color(0xFFE7E7E7);
-// set some background color
-const Color background = Color.fromARGB(255, 255, 255, 255);
+const Color primary = Color.fromARGB(255, 253, 152, 8);
+
