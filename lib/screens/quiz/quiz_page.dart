@@ -21,7 +21,7 @@ class _QuizPageState extends State<QuizPage> {
                 image: AssetImage('assets/images/whiteBackground.png'),
                 fit: BoxFit.fill)),
         child: Container(
-          margin: const EdgeInsets.symmetric(horizontal: 25),
+          margin: const EdgeInsets.all(25),
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
             crossAxisAlignment: CrossAxisAlignment.stretch,
@@ -30,11 +30,11 @@ class _QuizPageState extends State<QuizPage> {
                 currentQuestion.question,
                 style: const TextStyle(
                   color: Colors.black,
-                  fontSize: 20,
+                  fontSize: 18,
                 ),
               ),
               const SizedBox(height: 30),
-              ...currentQuestion.answers.map((answer) {
+              ...currentQuestion.getShuffledAnswers().map((answer) {
                 return AnswerButton(
                   answerText: answer,
                   onTap: () {},
