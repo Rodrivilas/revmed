@@ -11,9 +11,27 @@ class QuizPage extends StatefulWidget {
 }
 
 class _QuizPageState extends State<QuizPage> {
-  final currentQuestion = questions[0];
+  var currentQuestionIndex = 0;
+  final List<String> selectedAnswers = [];
+  var answeredQuestions = [];
+  answerQuestion() {
+    if (currentQuestionIndex < questions.length - 1) {
+      setState(() {
+        currentQuestionIndex++;
+      });
+    } else {
+      Navigator.pop(context);
+    }
+  }
+
+  void chooseAnswer(String answer) {
+    selectedAnswers.add(answer);
+  }
+
   @override
   Widget build(BuildContext context) {
+    var currentQuestion = questions[currentQuestionIndex];
+    answeredQuestions.add(currentQuestion);
     return Scaffold(
       body: Container(
         decoration: const BoxDecoration(
@@ -24,7 +42,6 @@ class _QuizPageState extends State<QuizPage> {
           margin: const EdgeInsets.all(25),
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
-            crossAxisAlignment: CrossAxisAlignment.stretch,
             children: [
               Text(
                 currentQuestion.question,
@@ -37,9 +54,42 @@ class _QuizPageState extends State<QuizPage> {
               ...currentQuestion.getShuffledAnswers().map((answer) {
                 return AnswerButton(
                   answerText: answer,
-                  onTap: () {},
+                  onTap: () {
+                    answerQuestion();
+                  },
                 );
               }),
+
+              IconButton(
+                  onPressed: () => showDialog<String>(
+                        context: context,
+                        builder: (BuildContext context) => Dialog(
+                          backgroundColor: Colors.white,
+                          child: Padding(
+                            padding: const EdgeInsets.all(8.0),
+                            child: SingleChildScrollView(
+                              child: Column(
+                                mainAxisSize: MainAxisSize.min,
+                                mainAxisAlignment: MainAxisAlignment.center,
+                                children: <Widget>[
+                                  const SizedBox(height: 15),
+                                  Text(currentQuestion.help),
+                                  const SizedBox(height: 15),
+                                  Center(
+                                    child: TextButton(
+                                      onPressed: () {
+                                        Navigator.pop(context);
+                                      },
+                                      child: const Text('Cerrar'),
+                                    ),
+                                  ),
+                                ],
+                              ),
+                            ),
+                          ),
+                        ),
+                      ),
+                  icon: const Icon(Icons.question_mark)),
               //TimerWidget(),
             ],
           ),

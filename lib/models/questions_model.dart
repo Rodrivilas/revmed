@@ -1,8 +1,8 @@
 class QuizQuestion {
-  const QuizQuestion(this.question, this.answers, this.helper);
+  const QuizQuestion(this.question, this.answers, this.help);
 
   final String question;
-  final String helper;
+  final String help;
   final List<String> answers;
 
   List<String> getShuffledAnswers() {
