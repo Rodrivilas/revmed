@@ -38,60 +38,61 @@ class _QuizPageState extends State<QuizPage> {
             image: DecorationImage(
                 image: AssetImage('assets/images/whiteBackground.png'),
                 fit: BoxFit.fill)),
-        child: Container(
-          margin: const EdgeInsets.all(25),
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              Text(
-                currentQuestion.question,
-                style: const TextStyle(
-                  color: Colors.black,
-                  fontSize: 18,
+        child: SingleChildScrollView(
+          child: Container(
+            margin: const EdgeInsets.all(25),
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                Text(
+                  currentQuestion.question,
+                  style: const TextStyle(
+                    color: Colors.black,
+                    fontSize: 18,
+                  ),
                 ),
-              ),
-              const SizedBox(height: 30),
-              ...currentQuestion.getShuffledAnswers().map((answer) {
-                return AnswerButton(
-                  answerText: answer,
-                  onTap: () {
-                    answerQuestion();
-                  },
-                );
-              }),
-
-              IconButton(
-                  onPressed: () => showDialog<String>(
-                        context: context,
-                        builder: (BuildContext context) => Dialog(
-                          backgroundColor: Colors.white,
-                          child: Padding(
-                            padding: const EdgeInsets.all(8.0),
-                            child: SingleChildScrollView(
-                              child: Column(
-                                mainAxisSize: MainAxisSize.min,
-                                mainAxisAlignment: MainAxisAlignment.center,
-                                children: <Widget>[
-                                  const SizedBox(height: 15),
-                                  Text(currentQuestion.help),
-                                  const SizedBox(height: 15),
-                                  Center(
-                                    child: TextButton(
-                                      onPressed: () {
-                                        Navigator.pop(context);
-                                      },
-                                      child: const Text('Cerrar'),
+                const SizedBox(height: 30),
+                ...currentQuestion.getShuffledAnswers().map((answer) {
+                  return AnswerButton(
+                    answerText: answer,
+                    onTap: () {
+                      answerQuestion();
+                    },
+                  );
+                }),
+                IconButton(
+                    onPressed: () => showDialog<String>(
+                          context: context,
+                          builder: (BuildContext context) => Dialog(
+                            backgroundColor: Colors.white,
+                            child: Padding(
+                              padding: const EdgeInsets.all(8.0),
+                              child: SingleChildScrollView(
+                                child: Column(
+                                  mainAxisSize: MainAxisSize.min,
+                                  mainAxisAlignment: MainAxisAlignment.center,
+                                  children: <Widget>[
+                                    const SizedBox(height: 15),
+                                    Text(currentQuestion.help),
+                                    const SizedBox(height: 15),
+                                    Center(
+                                      child: TextButton(
+                                        onPressed: () {
+                                          Navigator.pop(context);
+                                        },
+                                        child: const Text('Cerrar'),
+                                      ),
                                     ),
-                                  ),
-                                ],
+                                  ],
+                                ),
                               ),
                             ),
                           ),
                         ),
-                      ),
-                  icon: const Icon(Icons.question_mark)),
-              //TimerWidget(),
-            ],
+                    icon: const Icon(Icons.question_mark)),
+                TimerWidget(),
+              ],
+            ),
           ),
         ),
       ),

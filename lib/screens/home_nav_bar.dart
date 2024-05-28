@@ -4,6 +4,7 @@ import 'package:google_sign_in/google_sign_in.dart';
 import 'package:revmed/components/constants.dart';
 import 'package:revmed/screens/home/home.dart';
 import 'package:revmed/screens/quiz/quiz_selection_page.dart';
+import 'package:revmed/screens/stats/statistics_page.dart';
 
 class HomeNavBar extends StatefulWidget {
   const HomeNavBar({super.key});
@@ -14,14 +15,9 @@ class HomeNavBar extends StatefulWidget {
 
 class _BottomNavigationBar extends State<HomeNavBar> {
   int _selectedIndex = 0;
-  static const TextStyle optionStyle =
-      TextStyle(fontSize: 30, fontWeight: FontWeight.bold);
   static final List<Widget> _widgetOptions = <Widget>[
     HomePage(),
-    const Text(
-      'Rendimento',
-      style: optionStyle,
-    ),
+    const StatisticsPage(),
     const QuizSelectionPage(),
   ];
 
