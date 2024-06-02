@@ -1,7 +1,7 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:google_sign_in/google_sign_in.dart';
-import 'package:revmed/components/constants.dart';
+import 'package:revmed/theme/color_scheme.dart';
 import 'package:revmed/screens/home/home.dart';
 import 'package:revmed/screens/quiz/quiz_selection_page.dart';
 import 'package:revmed/screens/stats/statistics_page.dart';
@@ -39,7 +39,7 @@ class _BottomNavigationBar extends State<HomeNavBar> {
         child: _widgetOptions.elementAt(_selectedIndex),
       ),
       bottomNavigationBar: BottomNavigationBar(
-        backgroundColor: Colors.white,
+        backgroundColor: Theme.of(context).cardColor,
         items: const <BottomNavigationBarItem>[
           BottomNavigationBarItem(
             icon: Icon(Icons.home),
@@ -56,7 +56,7 @@ class _BottomNavigationBar extends State<HomeNavBar> {
         ],
         currentIndex: _selectedIndex,
         showUnselectedLabels: true,
-        unselectedItemColor: Colors.blueGrey,
+        unselectedItemColor: Theme.of(context).disabledColor,
         selectedItemColor: primary,
         onTap: _onItemTapped,
       ),

@@ -16,7 +16,10 @@ class _TimerWidgetState extends State<TimerWidget> {
   @override
   void initState() {
     super.initState();
+
     reset();
+
+    startTimer();
   }
 
   void reset() {
@@ -57,12 +60,6 @@ class _TimerWidgetState extends State<TimerWidget> {
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
             SizedBox(
-              width: MediaQuery.of(context).size.width,
-              height: MediaQuery.of(context).size.height / 6,
-            ),
-            SizedBox(
-              width: MediaQuery.of(context).size.width,
-              height: MediaQuery.of(context).size.height / 3,
               child: Padding(
                 padding: const EdgeInsets.all(10.0),
                 child: Column(
@@ -72,39 +69,6 @@ class _TimerWidgetState extends State<TimerWidget> {
                     buildTime(),
                   ],
                 ),
-              ),
-            ),
-            SizedBox(
-              width: MediaQuery.of(context).size.width,
-              height: MediaQuery.of(context).size.height / 3,
-              child: Column(
-                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                children: [
-                  ButtonWidget(
-                    text: "Start",
-                    onClicked: () {
-                      startTimer();
-                    },
-                    backgroundColor: Colors.green,
-                    color: Colors.black,
-                  ),
-                  ButtonWidget(
-                    text: "Stop",
-                    onClicked: () {
-                      stopTimer(resets: false);
-                    },
-                    backgroundColor: Colors.red,
-                    color: Colors.black,
-                  ),
-                  ButtonWidget(
-                    text: "Reset",
-                    onClicked: () {
-                      stopTimer();
-                    },
-                    backgroundColor: Colors.yellow,
-                    color: Colors.black,
-                  ),
-                ],
               ),
             ),
           ],
@@ -123,11 +87,11 @@ class _TimerWidgetState extends State<TimerWidget> {
         buildTimeCard(
           time: hours,
         ),
-        const SizedBox(width: 8),
+        const SizedBox(width: 4),
         buildTimeCard(
           time: minutes,
         ),
-        const SizedBox(width: 8),
+        const SizedBox(width: 4),
         buildTimeCard(
           time: seconds,
         )
@@ -140,17 +104,12 @@ buildTimeCard({required String time}) => Column(
       mainAxisAlignment: MainAxisAlignment.center,
       children: [
         Container(
-          padding: const EdgeInsets.all(8),
-          decoration: BoxDecoration(
-            color: Colors.white,
-            borderRadius: BorderRadius.circular(20),
-          ),
+          padding: const EdgeInsets.all(4),
           child: Text(
             time,
             style: const TextStyle(
               fontWeight: FontWeight.bold,
-              color: Colors.black,
-              fontSize: 45,
+              fontSize: 25,
             ),
           ),
         ),

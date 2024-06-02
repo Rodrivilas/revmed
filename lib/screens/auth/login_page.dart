@@ -1,6 +1,6 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
-import 'package:revmed/components/constants.dart';
+import 'package:revmed/theme/color_scheme.dart';
 import 'package:revmed/components/text_field.dart';
 
 class LogInPage extends StatefulWidget {
@@ -42,7 +42,7 @@ class _LogInPageState extends State<LogInPage> {
       body: Container(
         decoration: const BoxDecoration(
             image: DecorationImage(
-                image: AssetImage('assets/images/whiteBackground.png'),
+                image: AssetImage('assets/images/whiteBackgroundAlt.png'),
                 fit: BoxFit.fill)),
         child: Center(
           child: SingleChildScrollView(
@@ -58,10 +58,9 @@ class _LogInPageState extends State<LogInPage> {
 
                 const SizedBox(height: 30),
 
-                Text(
+                const Text(
                   'Bem-vindo, faça login na sua conta agora.',
                   style: TextStyle(
-                    color: Colors.grey[700],
                     fontSize: 16,
                   ),
                 ),
@@ -94,7 +93,7 @@ class _LogInPageState extends State<LogInPage> {
                     children: [
                       Text(
                         'Esqueceu sua senha?',
-                        style: TextStyle(color: Colors.grey[600]),
+                        style: TextStyle(color: Theme.of(context).primaryColor),
                       ),
                     ],
                   ),

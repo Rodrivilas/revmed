@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:revmed/components/constants.dart';
+import 'package:revmed/theme/color_scheme.dart';
 
 class MyButton extends StatelessWidget {
   final Function()? onTap;

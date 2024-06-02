@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:revmed/components/constants.dart';
 
 class AnswerButton extends StatelessWidget {
   const AnswerButton(
@@ -16,13 +15,12 @@ class AnswerButton extends StatelessWidget {
           onPressed: onTap,
           style: ElevatedButton.styleFrom(
               padding: const EdgeInsets.symmetric(vertical: 5, horizontal: 30),
-              backgroundColor: const Color.fromARGB(224, 255, 255, 255),
-              foregroundColor: primary,
+              backgroundColor: Theme.of(context).cardColor,
+              foregroundColor: const Color.fromARGB(255, 114, 114, 114),
               shape: const RoundedRectangleBorder(
                   borderRadius: BorderRadius.all(Radius.circular(12)))),
           child: Text(
             answerText,
-            style: const TextStyle(color: Colors.black),
           ),
         ),
       ],

@@ -14,6 +14,8 @@ class _QuizPageState extends State<QuizPage> {
   var currentQuestionIndex = 0;
   final List<String> selectedAnswers = [];
   var answeredQuestions = [];
+
+  bool checkedValue = true;
   answerQuestion() {
     if (currentQuestionIndex < questions.length - 1) {
       setState(() {
@@ -47,7 +49,6 @@ class _QuizPageState extends State<QuizPage> {
                 Text(
                   currentQuestion.question,
                   style: const TextStyle(
-                    color: Colors.black,
                     fontSize: 18,
                   ),
                 ),
@@ -61,36 +62,37 @@ class _QuizPageState extends State<QuizPage> {
                   );
                 }),
                 IconButton(
-                    onPressed: () => showDialog<String>(
-                          context: context,
-                          builder: (BuildContext context) => Dialog(
-                            backgroundColor: Colors.white,
-                            child: Padding(
-                              padding: const EdgeInsets.all(8.0),
-                              child: SingleChildScrollView(
-                                child: Column(
-                                  mainAxisSize: MainAxisSize.min,
-                                  mainAxisAlignment: MainAxisAlignment.center,
-                                  children: <Widget>[
-                                    const SizedBox(height: 15),
-                                    Text(currentQuestion.help),
-                                    const SizedBox(height: 15),
-                                    Center(
-                                      child: TextButton(
-                                        onPressed: () {
-                                          Navigator.pop(context);
-                                        },
-                                        child: const Text('Cerrar'),
-                                      ),
+                    onPressed: () {
+                      showModalBottomSheet(
+                        backgroundColor: Theme.of(context).cardColor,
+                        context: context,
+                        builder: (BuildContext context) {
+                          return Padding(
+                            padding: const EdgeInsets.symmetric(
+                                vertical: 25, horizontal: 15),
+                            child: SingleChildScrollView(
+                              child: Column(
+                                mainAxisSize: MainAxisSize.min,
+                                mainAxisAlignment: MainAxisAlignment.center,
+                                children: <Widget>[
+                                  Text(currentQuestion.help),
+                                  Center(
+                                    child: TextButton(
+                                      onPressed: () {
+                                        Navigator.pop(context);
+                                      },
+                                      child: const Text('Cerrar'),
                                     ),
-                                  ],
-                                ),
+                                  ),
+                                ],
                               ),
                             ),
-                          ),
-                        ),
+                          );
+                        },
+                      );
+                    },
                     icon: const Icon(Icons.question_mark)),
-                TimerWidget(),
+                const TimerWidget(),
               ],
             ),
           ),

@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:revmed/components/constants.dart';
 
 class StatCard extends StatelessWidget {
   const StatCard(
@@ -14,7 +13,7 @@ class StatCard extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Card(
-      color: const Color.fromARGB(214, 255, 255, 255),
+      color: Theme.of(context).cardColor,
       child: Padding(
         padding: const EdgeInsets.symmetric(vertical: 13, horizontal: 22),
         child: Column(
@@ -25,7 +24,6 @@ class StatCard extends StatelessWidget {
               padding: const EdgeInsets.all(8.0),
               child: Text(titleText,
                   style: const TextStyle(
-                    color: Colors.black,
                     fontSize: 20,
                   )),
             ),
@@ -36,13 +34,15 @@ class StatCard extends StatelessWidget {
                 Padding(
                   padding: const EdgeInsets.only(right: 10),
                   child: Container(
-                    decoration: const BoxDecoration(
-                        shape: BoxShape.circle, color: Colors.white),
+                    decoration: BoxDecoration(
+                      shape: BoxShape.circle,
+                      color: Theme.of(context).scaffoldBackgroundColor,
+                    ),
                     child: Padding(
-                      padding: EdgeInsets.all(18.0),
+                      padding: const EdgeInsets.all(18.0),
                       child: Icon(
                         cardIcon,
-                        color: primary,
+                        color: Theme.of(context).primaryColor,
                         size: 22,
                       ),
                     ),
@@ -51,9 +51,7 @@ class StatCard extends StatelessWidget {
                 Expanded(
                   child: Text(statText,
                       style: const TextStyle(
-                          color: Colors.black,
-                          fontSize: 24,
-                          fontWeight: FontWeight.bold)),
+                          fontSize: 24, fontWeight: FontWeight.bold)),
                 ),
               ],
             ),
