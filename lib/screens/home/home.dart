@@ -1,8 +1,11 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_animate/flutter_animate.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:google_sign_in/google_sign_in.dart';
+import 'package:revmed/components/contact_widget.dart';
 import 'package:revmed/components/streak_card.dart';
+import 'package:revmed/data/blocs.dart';
 import 'package:revmed/services/notification_service.dart';
 
 class HomePage extends StatefulWidget {
@@ -14,6 +17,7 @@ class HomePage extends StatefulWidget {
 
 class _HomePageState extends State<HomePage> {
   User user = FirebaseAuth.instance.currentUser!;
+  var today = DateTime.now();
 
   Future<void> logOut() async {
     await FirebaseAuth.instance.signOut();
@@ -21,7 +25,14 @@ class _HomePageState extends State<HomePage> {
   }
 
   @override
+  void initState() {
+    super.initState();
+  }
+
+  @override
   Widget build(BuildContext context) {
+    final dateCubit = context.watch<DateCubit>().state;
+
     return Animate(
       effects: const [FadeEffect()],
       child: Scaffold(
@@ -100,10 +111,12 @@ class _HomePageState extends State<HomePage> {
                     ],
                   ),
                   const SizedBox(height: 20),
-                  const StreakCard(streak: "29"),
+                  Animate(
+                      effects: const [ShimmerEffect(), MoveEffect()],
+                      child: const StreakCard(streak: "1")),
                   const SizedBox(height: 20),
                   const Text("Contact Us"),
-                  const SizedBox(height: 20),
+                  const ContactWidget(),
                   const Text("Contact Us"),
                 ]),
           ),
