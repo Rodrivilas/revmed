@@ -16,7 +16,7 @@ class HomeNavBar extends StatefulWidget {
 class _BottomNavigationBar extends State<HomeNavBar> {
   int _selectedIndex = 0;
   static final List<Widget> _widgetOptions = <Widget>[
-    HomePage(),
+    const HomePage(),
     const StatisticsPage(),
     const QuizSelectionPage(),
   ];
@@ -39,7 +39,7 @@ class _BottomNavigationBar extends State<HomeNavBar> {
         child: _widgetOptions.elementAt(_selectedIndex),
       ),
       bottomNavigationBar: BottomNavigationBar(
-        backgroundColor: Theme.of(context).cardColor,
+        backgroundColor: Theme.of(context).scaffoldBackgroundColor,
         items: const <BottomNavigationBarItem>[
           BottomNavigationBarItem(
             icon: Icon(Icons.home),
