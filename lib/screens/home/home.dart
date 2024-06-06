@@ -1,11 +1,10 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_animate/flutter_animate.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:google_sign_in/google_sign_in.dart';
 import 'package:revmed/components/contact_widget.dart';
+import 'package:revmed/components/home_image_card.dart';
 import 'package:revmed/components/streak_card.dart';
-import 'package:revmed/data/blocs.dart';
 import 'package:revmed/services/notification_service.dart';
 
 class HomePage extends StatefulWidget {
@@ -31,10 +30,8 @@ class _HomePageState extends State<HomePage> {
 
   @override
   Widget build(BuildContext context) {
-    final dateCubit = context.watch<DateCubit>().state;
-
     return Animate(
-      effects: const [FadeEffect()],
+      effects: [FadeEffect(duration: 200.ms)],
       child: Scaffold(
         appBar: AppBar(
           backgroundColor: Theme.of(context).cardColor,
@@ -80,7 +77,7 @@ class _HomePageState extends State<HomePage> {
         ),
         body: SingleChildScrollView(
           child: Padding(
-            padding: const EdgeInsets.all(20.0),
+            padding: const EdgeInsets.symmetric(horizontal: 20.0, vertical: 5),
             child: Column(
                 mainAxisAlignment: MainAxisAlignment.start,
                 crossAxisAlignment: CrossAxisAlignment.start,
@@ -89,35 +86,43 @@ class _HomePageState extends State<HomePage> {
                     mainAxisSize: MainAxisSize.max,
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
-                      Column(
-                        mainAxisAlignment: MainAxisAlignment.start,
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          Text(
-                            "Welcome ",
-                            style: TextStyle(
-                                fontSize: 22,
-                                color: Theme.of(context).primaryColor),
-                          ),
-                          Text(
-                            user.email.toString(),
-                            style: const TextStyle(
-                                fontSize: 25, fontWeight: FontWeight.bold),
-                          ),
-                        ],
+                      Expanded(
+                        child: Column(
+                          mainAxisAlignment: MainAxisAlignment.start,
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            Text(
+                              "Bem-vindo ",
+                              style: TextStyle(
+                                  fontSize: 22,
+                                  color: Theme.of(context).primaryColor),
+                            ),
+                            Text(
+                              user.email.toString(),
+                              style: const TextStyle(
+                                  fontSize: 20, fontWeight: FontWeight.bold),
+                            ),
+                          ],
+                        ),
                       ),
                       IconButton(
                           onPressed: () {}, icon: const Icon(Icons.settings))
                     ],
                   ),
-                  const SizedBox(height: 20),
+                  const SizedBox(height: 25),
+                  const HomeCard(),
+                  const SizedBox(height: 25),
                   Animate(
-                      effects: const [ShimmerEffect(), MoveEffect()],
-                      child: const StreakCard(streak: "1")),
-                  const SizedBox(height: 20),
-                  const Text("Contact Us"),
+                      effects: const [ShimmerEffect()],
+                      child: const StreakCard(streak: "0")),
+                  const SizedBox(height: 25),
+                  const Text(
+                    "Contate-nos",
+                    style: TextStyle(
+                      fontSize: 22,
+                    ),
+                  ),
                   const ContactWidget(),
-                  const Text("Contact Us"),
                 ]),
           ),
         ),

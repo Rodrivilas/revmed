@@ -25,7 +25,7 @@ class BlocsProvider extends StatelessWidget {
   Widget build(BuildContext context) {
     return MultiBlocProvider(
       providers: [
-        BlocProvider(create: (context) => DateCubit()),
+        BlocProvider(create: (context) => StreakCubit()),
       ],
       child: const MyApp(),
     );

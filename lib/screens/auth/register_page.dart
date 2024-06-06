@@ -11,6 +11,9 @@ class RegisterPage extends StatefulWidget {
 }
 
 class _RegisterPageState extends State<RegisterPage> {
+  final usernameController = TextEditingController();
+  final nameController = TextEditingController();
+  final lastNameController = TextEditingController();
   final emailController = TextEditingController();
 
   final passwordController = TextEditingController();
@@ -39,7 +42,7 @@ class _RegisterPageState extends State<RegisterPage> {
     } else {
       ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
           content: Text(
-        'Please enter valid senha',
+        'Digite uma senha válida.',
       )));
     }
   }
@@ -64,12 +67,33 @@ class _RegisterPageState extends State<RegisterPage> {
                 ),
                 const SizedBox(height: 30),
                 const Text(
-                  'Bem-vindo, faça signup na sua conta agora.',
+                  'Bem-vindo, crie sua conta aqui por favor.',
                   style: TextStyle(
                     fontSize: 16,
                   ),
                 ),
-                const SizedBox(height: 55),
+                const SizedBox(height: 35),
+                MyTextField(
+                  controller: usernameController,
+                  hintText: 'Nome de usuário',
+                  obscureText: false,
+                  keyboardType: TextInputType.name,
+                ),
+                const SizedBox(height: 10),
+                MyTextField(
+                  controller: nameController,
+                  hintText: 'Nome',
+                  obscureText: false,
+                  keyboardType: TextInputType.name,
+                ),
+                const SizedBox(height: 10),
+                MyTextField(
+                  controller: lastNameController,
+                  hintText: 'Sobrenome',
+                  obscureText: false,
+                  keyboardType: TextInputType.name,
+                ),
+                const SizedBox(height: 10),
                 MyTextField(
                   controller: emailController,
                   hintText: 'e-mail',
@@ -90,7 +114,7 @@ class _RegisterPageState extends State<RegisterPage> {
                   obscureText: true,
                   keyboardType: TextInputType.visiblePassword,
                 ),
-                const SizedBox(height: 65),
+                const SizedBox(height: 45),
                 Container(
                   margin: const EdgeInsets.symmetric(horizontal: 25),
                   child: Column(children: [

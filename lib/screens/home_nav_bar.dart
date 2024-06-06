@@ -1,6 +1,4 @@
-import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
-import 'package:google_sign_in/google_sign_in.dart';
 import 'package:revmed/theme/color_scheme.dart';
 import 'package:revmed/screens/home/home.dart';
 import 'package:revmed/screens/quiz/quiz_selection_page.dart';
@@ -14,10 +12,10 @@ class HomeNavBar extends StatefulWidget {
 }
 
 class _BottomNavigationBar extends State<HomeNavBar> {
-  int _selectedIndex = 0;
+  int _selectedIndex = 1;
   static final List<Widget> _widgetOptions = <Widget>[
-    const HomePage(),
     const StatisticsPage(),
+    const HomePage(),
     const QuizSelectionPage(),
   ];
 
@@ -25,11 +23,6 @@ class _BottomNavigationBar extends State<HomeNavBar> {
     setState(() {
       _selectedIndex = index;
     });
-  }
-
-  Future<void> logOut() async {
-    await FirebaseAuth.instance.signOut();
-    await GoogleSignIn().signOut();
   }
 
   @override
@@ -42,12 +35,12 @@ class _BottomNavigationBar extends State<HomeNavBar> {
         backgroundColor: Theme.of(context).scaffoldBackgroundColor,
         items: const <BottomNavigationBarItem>[
           BottomNavigationBarItem(
-            icon: Icon(Icons.home),
-            label: 'Home',
-          ),
-          BottomNavigationBarItem(
             icon: Icon(Icons.auto_graph),
             label: 'Rendimento',
+          ),
+          BottomNavigationBarItem(
+            icon: Icon(Icons.home),
+            label: 'Home',
           ),
           BottomNavigationBarItem(
             icon: Icon(Icons.school),
