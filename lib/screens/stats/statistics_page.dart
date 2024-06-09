@@ -14,7 +14,7 @@ class StatisticsPage extends StatelessWidget {
           decoration: const BoxDecoration(
               image: DecorationImage(
                   image: AssetImage('assets/images/whiteBackgroundAlt.png'),
-                  fit: BoxFit.fill)),
+                  fit: BoxFit.cover)),
           child: Container(
             margin: const EdgeInsets.all(15),
             child: const Center(

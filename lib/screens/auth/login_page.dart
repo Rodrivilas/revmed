@@ -42,7 +42,7 @@ class _LogInPageState extends State<LogInPage> {
       body: Container(
         decoration: const BoxDecoration(
             image: DecorationImage(
-                image: AssetImage('assets/images/whiteBackgroundAlt.png'),
+                image: AssetImage('assets/images/whiteBackground.png'),
                 fit: BoxFit.fill)),
         child: Center(
           child: SingleChildScrollView(

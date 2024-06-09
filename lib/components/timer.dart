@@ -60,15 +60,11 @@ class _TimerWidgetState extends State<TimerWidget> {
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
             SizedBox(
-              child: Padding(
-                padding: const EdgeInsets.all(10.0),
-                child: Column(
-                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                  children: [
-                    const SizedBox(height: 15),
-                    buildTime(),
-                  ],
-                ),
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                children: [
+                  buildTime(),
+                ],
               ),
             ),
           ],
@@ -87,11 +83,9 @@ class _TimerWidgetState extends State<TimerWidget> {
         buildTimeCard(
           time: hours,
         ),
-        const SizedBox(width: 4),
         buildTimeCard(
           time: minutes,
         ),
-        const SizedBox(width: 4),
         buildTimeCard(
           time: seconds,
         )
@@ -113,35 +107,5 @@ buildTimeCard({required String time}) => Column(
             ),
           ),
         ),
-        const SizedBox(height: 15),
       ],
     );
-
-class ButtonWidget extends StatelessWidget {
-  final String text;
-  final Color color;
-  final Color backgroundColor;
-  final VoidCallback onClicked;
-
-  const ButtonWidget({
-    Key? key,
-    required this.text,
-    required this.onClicked,
-    required this.color,
-    required this.backgroundColor,
-  }) : super(key: key);
-  @override
-  Widget build(BuildContext context) => ElevatedButton(
-      style: ElevatedButton.styleFrom(
-          backgroundColor: backgroundColor,
-          padding: const EdgeInsets.symmetric(horizontal: 32, vertical: 16)),
-      onPressed: onClicked,
-      child: Text(
-        text,
-        style: TextStyle(
-          fontSize: 20,
-          color: color,
-          fontWeight: FontWeight.bold,
-        ),
-      ));
-}

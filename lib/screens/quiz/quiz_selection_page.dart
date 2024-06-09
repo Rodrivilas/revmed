@@ -20,7 +20,7 @@ class _QuizSelectionPage extends State<QuizSelectionPage> {
         decoration: const BoxDecoration(
             image: DecorationImage(
                 image: AssetImage('assets/images/whiteBackground.png'),
-                fit: BoxFit.fill)),
+                fit: BoxFit.cover)),
         child: Container(
           margin: const EdgeInsets.symmetric(horizontal: 25),
           child: Center(

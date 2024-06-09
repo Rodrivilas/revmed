@@ -32,7 +32,7 @@ class StreakCard extends StatelessWidget {
                   Padding(
                     padding: const EdgeInsets.only(bottom: 6, right: 4),
                     child: Icon(
-                      CustomIcons.fireAlt,
+                      CustomIcons.stats,
                       size: 28,
                       color: Theme.of(context).primaryColor,
                     ),

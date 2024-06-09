@@ -75,55 +75,62 @@ class _HomePageState extends State<HomePage> {
                 icon: const Icon(Icons.logout))
           ],
         ),
-        body: SingleChildScrollView(
-          child: Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 20.0, vertical: 5),
-            child: Column(
-                mainAxisAlignment: MainAxisAlignment.start,
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  Row(
-                    mainAxisSize: MainAxisSize.max,
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: [
-                      Expanded(
-                        child: Column(
-                          mainAxisAlignment: MainAxisAlignment.start,
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
-                            Text(
-                              "Bem-vindo ",
-                              style: TextStyle(
-                                  fontSize: 22,
-                                  color: Theme.of(context).primaryColor),
-                            ),
-                            Text(
-                              user.email.toString(),
-                              style: const TextStyle(
-                                  fontSize: 20, fontWeight: FontWeight.bold),
-                            ),
-                          ],
+        body: Container(
+          decoration: const BoxDecoration(
+              image: DecorationImage(
+                  image: AssetImage('assets/images/splash_background.png'),
+                  fit: BoxFit.cover)),
+          child: SingleChildScrollView(
+            child: Padding(
+              padding:
+                  const EdgeInsets.symmetric(horizontal: 20.0, vertical: 5),
+              child: Column(
+                  mainAxisAlignment: MainAxisAlignment.start,
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Row(
+                      mainAxisSize: MainAxisSize.max,
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                        Expanded(
+                          child: Column(
+                            mainAxisAlignment: MainAxisAlignment.start,
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              Text(
+                                "Bem-vindo ",
+                                style: TextStyle(
+                                    fontSize: 22,
+                                    color: Theme.of(context).primaryColor),
+                              ),
+                              Text(
+                                user.email.toString(),
+                                style: const TextStyle(
+                                    fontSize: 20, fontWeight: FontWeight.bold),
+                              ),
+                            ],
+                          ),
                         ),
-                      ),
-                      IconButton(
-                          onPressed: () {}, icon: const Icon(Icons.settings))
-                    ],
-                  ),
-                  const SizedBox(height: 25),
-                  const HomeCard(),
-                  const SizedBox(height: 25),
-                  Animate(
-                      effects: const [ShimmerEffect()],
-                      child: const StreakCard(streak: "0")),
-                  const SizedBox(height: 25),
-                  const Text(
-                    "Contate-nos",
-                    style: TextStyle(
-                      fontSize: 22,
+                        IconButton(
+                            onPressed: () {}, icon: const Icon(Icons.settings))
+                      ],
                     ),
-                  ),
-                  const ContactWidget(),
-                ]),
+                    const SizedBox(height: 25),
+                    const HomeCard(),
+                    const SizedBox(height: 25),
+                    Animate(
+                        effects: const [ShimmerEffect()],
+                        child: const StreakCard(streak: "0")),
+                    const SizedBox(height: 25),
+                    const Text(
+                      "Contate-nos",
+                      style: TextStyle(
+                        fontSize: 22,
+                      ),
+                    ),
+                    const ContactWidget(),
+                  ]),
+            ),
           ),
         ),
       ),

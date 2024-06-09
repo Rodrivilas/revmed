@@ -105,7 +105,7 @@ class _AuthMenuState extends State<AuthMenu> {
                               const Color.fromARGB(255, 253, 152, 8),
                         ),
                         icon: const Icon(Icons.face),
-                        label: const Text('Entrar com CPF'),
+                        label: const Text('Entrar com E-mail'),
                       ),
                       const SizedBox(height: 10),
                       TextButton.icon(

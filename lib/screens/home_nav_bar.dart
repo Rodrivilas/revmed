@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:revmed/my_flutter_app_icons.dart';
 import 'package:revmed/theme/color_scheme.dart';
 import 'package:revmed/screens/home/home.dart';
 import 'package:revmed/screens/quiz/quiz_selection_page.dart';
@@ -33,17 +34,24 @@ class _BottomNavigationBar extends State<HomeNavBar> {
       ),
       bottomNavigationBar: BottomNavigationBar(
         backgroundColor: Theme.of(context).scaffoldBackgroundColor,
+        iconSize: 18,
         items: const <BottomNavigationBarItem>[
           BottomNavigationBarItem(
-            icon: Icon(Icons.auto_graph),
+            icon: Icon(
+              CustomIcons.stats,
+            ),
             label: 'Rendimento',
           ),
           BottomNavigationBarItem(
-            icon: Icon(Icons.home),
+            icon: Icon(
+              CustomIcons.home,
+            ),
             label: 'Home',
           ),
           BottomNavigationBarItem(
-            icon: Icon(Icons.school),
+            icon: Icon(
+              CustomIcons.quiz,
+            ),
             label: 'Questões',
           ),
         ],

@@ -15,7 +15,6 @@ const lightColorScheme = ColorScheme(
   onError: Color(0xFFFFFFFF),
   surface: Color(0xFFFEFFFF),
   onSurface: Color(0xFF3b3b3b),
-  
 );
 
 const darkColorScheme = ColorScheme(
@@ -26,6 +25,6 @@ const darkColorScheme = ColorScheme(
   onSecondary: Color(0xFF253048),
   error: Color(0xFFFFB4AB),
   onError: Color(0xFF690005),
-  surface: Color(0xFF1B1B1F),
+  surface: Color.fromARGB(255, 16, 16, 17),
   onSurface: Color(0xFFE3E2E6),
 );

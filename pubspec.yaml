@@ -78,6 +78,7 @@ flutter:
     - assets/images/background.png
     - assets/images/whiteBackground.png
     - assets/images/whiteBackgroundAlt.png
+    - assets/images/splash_background.png
 
   fonts:
     - family: CustomIcons

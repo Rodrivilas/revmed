@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:revmed/components/Answer_button.dart';
+import 'package:revmed/components/answer_checkbox.dart';
 import 'package:revmed/components/timer.dart';
 import 'package:revmed/data/questions.dart';
 
@@ -12,8 +12,6 @@ class QuizPage extends StatefulWidget {
 
 class _QuizPageState extends State<QuizPage> {
   var currentQuestionIndex = 0;
-  final List<String> selectedAnswers = [];
-  var answeredQuestions = [];
 
   bool checkedValue = true;
   answerQuestion() {
@@ -26,14 +24,9 @@ class _QuizPageState extends State<QuizPage> {
     }
   }
 
-  void chooseAnswer(String answer) {
-    selectedAnswers.add(answer);
-  }
-
   @override
   Widget build(BuildContext context) {
     var currentQuestion = questions[currentQuestionIndex];
-    answeredQuestions.add(currentQuestion);
     return Scaffold(
       body: Container(
         decoration: const BoxDecoration(
@@ -42,62 +35,81 @@ class _QuizPageState extends State<QuizPage> {
                 fit: BoxFit.fill)),
         child: SingleChildScrollView(
           child: Container(
-            margin: const EdgeInsets.all(25),
+            margin: const EdgeInsets.symmetric(horizontal: 25, vertical: 35),
             child: Column(
-              mainAxisAlignment: MainAxisAlignment.center,
+              mainAxisAlignment: MainAxisAlignment.start,
+              crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                Text(
-                  currentQuestion.question,
-                  style: const TextStyle(
-                    fontSize: 18,
+                const Text(
+                  "Questionário",
+                  style: TextStyle(
+                    fontSize: 20,
                   ),
                 ),
-                const SizedBox(height: 30),
-                ...currentQuestion.getShuffledAnswers().map((answer) {
-                  return AnswerButton(
-                    answerText: answer,
-                    onTap: () {
-                      answerQuestion();
-                    },
-                  );
-                }),
-                IconButton(
-                    onPressed: () {
-                      showModalBottomSheet(
-                        backgroundColor: Theme.of(context).cardColor,
-                        context: context,
-                        builder: (BuildContext context) {
-                          return Padding(
-                            padding: const EdgeInsets.symmetric(
-                                vertical: 25, horizontal: 15),
-                            child: SingleChildScrollView(
-                              child: Column(
-                                mainAxisSize: MainAxisSize.min,
-                                mainAxisAlignment: MainAxisAlignment.center,
-                                children: <Widget>[
-                                  Text(currentQuestion.help),
-                                  Center(
-                                    child: TextButton(
-                                      onPressed: () {
-                                        Navigator.pop(context);
-                                      },
-                                      child: const Text('Cerrar'),
-                                    ),
+                Padding(
+                  padding: const EdgeInsets.all(8.0),
+                  child: Text(
+                    currentQuestion.question,
+                    style: const TextStyle(
+                      fontWeight: FontWeight.bold,
+                      fontSize: 18,
+                    ),
+                  ),
+                ),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  crossAxisAlignment: CrossAxisAlignment.end,
+                  children: [
+                    const TimerWidget(),
+                    IconButton(
+                        onPressed: () {
+                          showModalBottomSheet(
+                            backgroundColor:
+                                Theme.of(context).scaffoldBackgroundColor,
+                            context: context,
+                            builder: (BuildContext context) {
+                              return Padding(
+                                padding: const EdgeInsets.symmetric(
+                                    vertical: 25, horizontal: 15),
+                                child: SingleChildScrollView(
+                                  child: Column(
+                                    mainAxisSize: MainAxisSize.min,
+                                    mainAxisAlignment: MainAxisAlignment.center,
+                                    children: <Widget>[
+                                      Text(currentQuestion.help),
+                                      Center(
+                                        child: TextButton(
+                                          onPressed: () {
+                                            Navigator.pop(context);
+                                          },
+                                          child: const Text('Cerrar'),
+                                        ),
+                                      ),
+                                    ],
                                   ),
-                                ],
-                              ),
-                            ),
+                                ),
+                              );
+                            },
                           );
                         },
-                      );
-                    },
-                    icon: const Icon(Icons.question_mark)),
-                const TimerWidget(),
+                        icon: const Icon(Icons.question_mark)),
+                  ],
+                ),
+                ...currentQuestion.getShuffledAnswers().map((answer) {
+                  return AnswerCheckbox(title: answer);
+                }),
+//.............................
               ],
             ),
           ),
         ),
       ),
+      persistentFooterButtons: [
+        ElevatedButton(
+          onPressed: () {},
+          child: const Text('Termina'),
+        )
+      ],
     );
   }
 }
